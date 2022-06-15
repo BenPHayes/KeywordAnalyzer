@@ -12,7 +12,10 @@ public class keywordMain {
 
 	public static void findKeywords() {
 		String FileTextString = FileTextSB.toString();
-		String stringArray[] = FileTextString.split(" ");
+		String FileTextStringNoPunct = removePunctuations(FileTextString);
+		String FileTextStringNoPunctOneSpace = FileTextStringNoPunct.replaceAll("\\s+", " ");
+		System.out.println(FileTextStringNoPunctOneSpace);
+		String stringArray[] = FileTextStringNoPunctOneSpace.split(" ");
 		System.out.println(Arrays.toString(stringArray));
 		int i = 0;
 		while (i < stringArray.length) {
@@ -58,6 +61,10 @@ public class keywordMain {
 
 	}
 
+	public static String removePunctuations(String source) {
+		return source.replaceAll("\\p{Punct}", "");
+	}
+
 	public static void getFileText(String fileName) {
 		try {
 			String str;
@@ -66,7 +73,6 @@ public class keywordMain {
     		while (myReader.hasNextLine()) {
     			str = myReader.nextLine();
         		FileTextSB.append(str + " ");
-        		System.out.println(str);
       		}
       		myReader.close();
     	}
@@ -81,7 +87,6 @@ public class keywordMain {
 		System.out.println("What is the name of your file? ");
 		/// String fileName = scnr.nextLine();
 		getFileText("C:\\Users\\bills\\Downloads\\AnalystInternKeywords.txt");
-		System.out.println(FileTextSB);
 		findKeywords();
 	}
 }
