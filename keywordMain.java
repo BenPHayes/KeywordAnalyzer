@@ -17,11 +17,10 @@ public class keywordMain {
 		String stringArray[] = FileTextStringNoPunctOneSpace.split(" ");
 		int i = 0;
 		while (i < stringArray.length) {
-			if (!keyWords.contains(stringArray[i])){
+			if (!keyWords.contains(stringArray[i])) {
 				keyWords.add(stringArray[i]);
 				keyWordsNum.add(1);
-			}
-			else {
+			} else {
 				int j = 0;
 				while (!stringArray[i].equals(keyWords.get(j))) {
 					j = j + 1;
@@ -34,16 +33,16 @@ public class keywordMain {
 		int p;
 		int g;
 		int maxArray[] = new int[keyWords.size()];
-		int maxItemNum[] = new int [keyWords.size()];
-		while (k < keyWords.size()){
+		int maxItemNum[] = new int[keyWords.size()];
+		while (k < keyWords.size()) {
 			p = 0;
 			while (keyWordsNum.get(k) <= maxArray[p]) {
 				p = p + 1;
 			}
 			g = 50;
-			while (g > p){
-				maxArray[g] = maxArray[g-1];
-				maxItemNum[g] = maxItemNum[g-1];
+			while (g > p) {
+				maxArray[g] = maxArray[g - 1];
+				maxItemNum[g] = maxItemNum[g - 1];
 				g = g - 1;
 			}
 			maxArray[p] = keyWordsNum.get(k);
@@ -73,25 +72,24 @@ public class keywordMain {
 	public static void getFileText(String fileName) {
 		try {
 			String str;
-    		File myFile = new File(fileName);
-    		Scanner myReader = new Scanner(myFile);
-    		while (myReader.hasNextLine()) {
-    			str = myReader.nextLine();
-        		FileTextSB.append(str + " ");
-      		}
-      		myReader.close();
-    	}
-    	catch (FileNotFoundException e) {
-    		System.out.println("An error occurred.");
-    		e.printStackTrace();
+			File myFile = new File(fileName);
+			Scanner myReader = new Scanner(myFile);
+			while (myReader.hasNextLine()) {
+				str = myReader.nextLine();
+				FileTextSB.append(str + " ");
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
 		Scanner scnr = new Scanner(System.in);
-		System.out.println("What is the name of your file? ");
-		/// String fileName = scnr.nextLine();
-		getFileText("C:\\Users\\bills\\Downloads\\AnalystInternKeywords.txt");
+		System.out.println("What is the name/path of your file? ");
+		String fileName = scnr.nextLine();
+		getFileText(fileName);
 		findKeywords();
 	}
 }
