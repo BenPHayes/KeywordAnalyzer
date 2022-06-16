@@ -14,9 +14,7 @@ public class keywordMain {
 		String FileTextString = FileTextSB.toString();
 		String FileTextStringNoPunct = removePunctuations(FileTextString);
 		String FileTextStringNoPunctOneSpace = FileTextStringNoPunct.replaceAll("\\s+", " ");
-		System.out.println(FileTextStringNoPunctOneSpace);
 		String stringArray[] = FileTextStringNoPunctOneSpace.split(" ");
-		System.out.println(Arrays.toString(stringArray));
 		int i = 0;
 		while (i < stringArray.length) {
 			if (!keyWords.contains(stringArray[i])){
