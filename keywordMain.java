@@ -33,24 +33,31 @@ public class keywordMain {
 			i = i + 1;
 		}
 		int k = 0;
-		int max = 0;
-		int max2 = 0;
-		int max3 = 0;
-		int maxItemNum = 0;
-		int maxItemNum2 = 0;
-		int maxItemNum3 = 0;
+		int p;
+		int g;
+		int maxArray[] = new int[keyWords.size()];
+		int maxItemNum[] = new int [keyWords.size()];
 		while (k < keyWords.size()){
-			if (keyWordsNum.get(k) > max) {
-				max3 = max2;
-				max2 = max;
-				max = keyWordsNum.get(k);
-				maxItemNum3 = maxItemNum2;
-				maxItemNum2 = maxItemNum;
-				maxItemNum = k;
+			p = 0;
+			while (keyWordsNum.get(k) <= maxArray[p]) {
+				p = p + 1;
 			}
+			g = 50;
+			while (g > p){
+				maxArray[g] = maxArray[g-1];
+				maxItemNum[g] = maxItemNum[g-1];
+				g = g - 1;
+			}
+			maxArray[p] = keyWordsNum.get(k);
+			maxItemNum[p] = k;
 			k = k + 1;
 		}
-		System.out.println("The three most common words are " + keyWords.get(maxItemNum) + ", " + keyWords.get(maxItemNum2) + ", and " + keyWords.get(maxItemNum3) + " with " + max + ", " + max2 + ", and " + max3 + " instances, respectively.");
+		System.out.println("50 most common words and number of instances: ");
+		int y = 0;
+		while (y < 50) {
+			System.out.println(keyWords.get(maxItemNum[y]) + "		" + keyWordsNum.get(maxItemNum[y]));
+			y = y + 1;
+		}
 	}
 
 	public static void findKeyPhraseTwo() {
