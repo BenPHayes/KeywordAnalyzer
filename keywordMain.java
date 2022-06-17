@@ -13,8 +13,8 @@ public class keywordMain {
 	public static void findKeywords() {
 		String FileTextString = FileTextSB.toString();
 		String FileTextStringNoPunct = removePunctuations(FileTextString);
-		String FileTextStringNoPunctOneSpace = FileTextStringNoPunct.replaceAll("\\s+", " ");
-		String stringArray[] = FileTextStringNoPunctOneSpace.split(" ");
+		String FileTextStringNoPunctOneSpaceLowercase = FileTextStringNoPunct.toLowerCase().replaceAll("\\s+", " ");
+		String stringArray[] = FileTextStringNoPunctOneSpaceLowercase.split(" ");
 		int i = 0;
 		while (i < stringArray.length) {
 			if (!keyWords.contains(stringArray[i])) {
