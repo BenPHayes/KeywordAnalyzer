@@ -9,8 +9,9 @@ public class keywordMain {
 	private static StringBuilder FileTextSB = new StringBuilder();
 	private static ArrayList<String> keyWords = new ArrayList<String>();
 	private static ArrayList<Integer> keyWordsNum = new ArrayList<Integer>();
+	private static int numWordsOutputted;
 
-	public static void findKeywords() {
+	public static void findKeywords(Scanner scnr) {
 		String FileTextString = FileTextSB.toString();
 		String FileTextStringNoPunct = removePunctuations(FileTextString);
 		String FileTextStringNoPunctOneSpaceLowercase = FileTextStringNoPunct.toLowerCase().replaceAll("\\s+", " ");
@@ -29,6 +30,23 @@ public class keywordMain {
 			}
 			i = i + 1;
 		}
+
+		System.out.println("How many words would you like to output? ");
+		while (!scnr.hasNextInt()) {
+			scnr.next();
+			System.out.println("Please enter an integer.");
+		}
+		numWordsOutputted = scnr.nextInt();
+		while (numWordsOutputted > keyWords.size()) {
+			System.out.println(
+					"Cannot display data for more words than there are unique words in your file. Please enter a smaller integer.");
+			while (!scnr.hasNextInt()) {
+				scnr.next();
+				System.out.println("Please enter an integer.");
+			}
+			numWordsOutputted = scnr.nextInt();
+		}
+
 		int k = 0;
 		int p;
 		int g;
@@ -39,7 +57,7 @@ public class keywordMain {
 			while (keyWordsNum.get(k) <= maxArray[p]) {
 				p = p + 1;
 			}
-			g = 50;
+			g = numWordsOutputted;
 			while (g > p) {
 				maxArray[g] = maxArray[g - 1];
 				maxItemNum[g] = maxItemNum[g - 1];
@@ -49,9 +67,9 @@ public class keywordMain {
 			maxItemNum[p] = k;
 			k = k + 1;
 		}
-		System.out.println("50 most common words and number of instances: ");
+		System.out.println(numWordsOutputted + " most common words and number of instances: ");
 		int y = 0;
-		while (y < 50) {
+		while (y < numWordsOutputted) {
 			System.out.println(keyWords.get(maxItemNum[y]) + "		" + keyWordsNum.get(maxItemNum[y]));
 			y = y + 1;
 		}
@@ -90,6 +108,6 @@ public class keywordMain {
 		System.out.println("What is the name/path of your file? ");
 		String fileName = scnr.nextLine();
 		getFileText(fileName);
-		findKeywords();
+		findKeywords(scnr);
 	}
 }
